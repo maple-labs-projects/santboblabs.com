@@ -19,18 +19,24 @@
     :root {
       --paper: #f4efe6;
       --surface: #fbf8f2;
+      --wash: #efe9dc;
       --rule: #d9cfbc;
       --rule-soft: #e6dfd0;
       --ink: #26221c;
       --ink-soft: #5b5347;
-      --ink-faint: #8a8071;
+      --ink-faint: #726959;
       --accent: #2f4a3a;
+      --accent-wash: #e4e9dd;
       --brass: #8c6d3a;
+      --positive: #4f6b4a;
+      --negative: #8a3a32;
+      --warn: #a06a2c;
       --deep: #1c1915;
       --on-dark: #f4efe6;
       --on-dark-soft: #bdb4a3;
       --display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
       --body: "EB Garamond", "Iowan Old Style", Georgia, serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; }
@@ -47,67 +53,88 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; }
+    ::selection { background: var(--accent); color: var(--on-dark); }
 
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; text-underline-offset: 0.2em; }
+
+    a:focus-visible, .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; }
+
+    .label {
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 28px 0;
+      padding: 30px 0 26px;
+      border-bottom: 1px solid var(--ink);
     }
 
     .mark {
       font-family: var(--display);
-      font-size: 1.5rem;
+      font-size: 1.65rem;
       font-weight: 500;
       letter-spacing: 0.02em;
       text-decoration: none;
     }
 
-    nav { display: flex; gap: 28px; }
+    nav { display: flex; gap: 32px; }
 
-    nav a, .label {
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
+    nav a {
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
+      color: var(--ink-soft);
+      transition: color 0.2s ease;
     }
 
-    nav a { color: var(--ink-soft); }
     nav a:hover { color: var(--accent); }
 
-    .label { color: var(--ink-faint); }
+    .hero { padding: clamp(4rem, 9vw, 7rem) 0 clamp(4rem, 9vw, 7rem); }
 
-    .hero { padding: 11vh 0 14vh; border-bottom: 1px solid var(--rule); }
-
-    h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; }
-
-    h1 {
-      font-size: clamp(2.8rem, 8vw, 6rem);
-      line-height: 1.02;
-      letter-spacing: -0.01em;
-      max-width: 14ch;
-      margin-top: 1.25rem;
+    .hero h1 {
+      font-size: clamp(3.1rem, 9vw, 6rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      margin: 0;
+      max-width: 22ch;
     }
 
-    h1 em { font-style: italic; color: var(--accent); }
+    .hero h1 em { font-style: italic; color: var(--accent); }
 
-    .lede {
-      max-width: 36rem;
-      margin: 2rem 0 2.5rem;
-      font-size: 1.25rem;
-      color: var(--ink-soft);
+    .hero-foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 4rem;
+      align-items: end;
+      margin: 3rem 0 4.5rem;
     }
+
+    .lede { font-size: 1.3rem; color: var(--ink-soft); max-width: 34rem; }
+
+    .actions { display: flex; gap: 1.75rem; align-items: center; justify-content: flex-end; }
 
     .btn {
       display: inline-block;
-      padding: 0.85rem 1.7rem;
+      padding: 0.95rem 1.9rem;
       background: var(--ink);
       color: var(--on-dark);
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
       border-radius: 2px;
@@ -116,110 +143,194 @@
 
     .btn:hover { background: var(--accent); }
 
-    .btn-quiet {
-      margin-left: 1.5rem;
-      color: var(--ink-soft);
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
+    .quiet {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
+      color: var(--ink-soft);
       border-bottom: 1px solid var(--rule);
-      padding-bottom: 2px;
+      padding-bottom: 3px;
+      transition: color 0.2s ease, border-color 0.2s ease;
     }
 
-    .btn-quiet:hover { color: var(--accent); border-color: var(--accent); }
+    .quiet:hover { color: var(--accent); border-color: var(--accent); }
 
-    section { padding: 12vh 0; border-bottom: 1px solid var(--rule); }
+    .ledger { border-top: 1px solid var(--ink); }
 
-    .split {
+    .ledger-head, .entry {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-      gap: 4rem;
-    }
-
-    h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.1; margin-top: 1rem; }
-
-    .split p { margin: 0 0 1.25rem; color: var(--ink-soft); }
-
-    .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
-
-    .steps li {
-      counter-increment: step;
-      display: grid;
-      grid-template-columns: 3.5rem 9rem 1fr;
+      grid-template-columns: 6.5rem minmax(0, 1.3fr) minmax(0, 1.4fr) 7rem 6rem;
+      gap: 1.25rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--rule-soft);
       align-items: baseline;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-top: 1px solid var(--rule-soft);
     }
 
-    .steps li:last-child { border-bottom: 1px solid var(--rule-soft); }
+    .ledger-head { padding: 0.8rem 0; border-bottom-color: var(--rule); }
 
-    .steps li::before {
-      content: counter(step, upper-roman);
-      font-family: var(--display);
-      font-size: 1.1rem;
-      color: var(--brass);
+    .ledger-body { min-height: calc(6 * 3.1rem); }
+
+    .entry { font-size: 1rem; animation: enter 0.8s var(--ease) both; }
+
+    .entry > * { font-variant-numeric: tabular-nums; }
+
+    .entry .agent, .entry .path { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .entry .path { color: var(--ink-soft); }
+
+    .entry .time { color: var(--ink-faint); }
+
+    .entry .amt, .ledger-head span:last-child { text-align: right; }
+
+    .verdict {
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.5s ease;
     }
 
-    .steps h3 { font-size: 1.45rem; }
+    .verdict.pending { color: var(--warn); }
+    .verdict.paid { color: var(--positive); }
+    .verdict.blocked { color: var(--negative); }
 
-    .steps span { color: var(--ink-soft); font-size: 0.98rem; }
+    .ledger-note { margin-top: 1rem; font-size: 0.85rem; color: var(--ink-faint); font-style: italic; }
 
-    .principles {
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(-0.6rem); clip-path: inset(0 0 100% 0); }
+      to { opacity: 1; transform: none; clip-path: inset(0); }
+    }
+
+    section { padding: clamp(4.5rem, 10vw, 8rem) 0; border-top: 1px solid var(--ink); }
+
+    .sec-head {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      margin-top: 3.5rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+      gap: 2rem;
+      margin-bottom: 4.5rem;
     }
 
-    .principles h3 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+    h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.04; letter-spacing: -0.01em; max-width: 20ch; }
 
-    .principles p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+    .thesis-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+      gap: 2rem;
+      padding: 2.25rem 0 2.5rem;
+      border-top: 1px solid var(--rule);
+    }
 
-    .rule-short { width: 2.5rem; height: 1px; background: var(--brass); margin-bottom: 1.1rem; }
+    .thesis-row:last-child { border-bottom: 1px solid var(--rule); }
+
+    .num { font-family: var(--display); font-size: 1.9rem; color: var(--brass); line-height: 1; }
+
+    .thesis-row h3 {
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      line-height: 1.15;
+      max-width: 26ch;
+    }
+
+    .thesis-row p { margin-top: 0.9rem; max-width: 40rem; color: var(--ink-soft); }
+
+    .pipeline {
+      list-style: none;
+      margin: 0 0 5rem;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      border-top: 1px solid var(--ink);
+    }
+
+    .pipeline li { padding: 1.4rem 1.25rem 1.6rem 0; border-bottom: 1px solid var(--rule); }
+
+    .pipeline li + li { padding-left: 1.25rem; border-left: 1px solid var(--rule-soft); }
+
+    .pipeline h3 { font-size: 1.55rem; margin: 0.6rem 0 0.35rem; }
+
+    .pipeline p { font-size: 0.9rem; line-height: 1.45; color: var(--ink-soft); }
+
+    .quote {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 3.6vw, 2.7rem);
+      line-height: 1.2;
+      max-width: 34ch;
+      text-wrap: balance;
+    }
+
+    .quote em { color: var(--accent); }
+
+    .status { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+
+    .status h3 { font-size: 2rem; margin: 0.6rem 0 1.5rem; }
+
+    .status ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+
+    .status li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule-soft);
+      color: var(--ink-soft);
+    }
+
+    .status li strong { display: block; font-weight: 500; color: var(--ink); }
 
     .closing {
       background: var(--deep);
       color: var(--on-dark);
+      border-top: 0;
       text-align: center;
-      border-bottom: 0;
     }
 
     .closing .label { color: var(--on-dark-soft); }
 
-    .closing h2 { max-width: 18ch; margin: 1rem auto 2.25rem; }
+    .closing h2 { margin: 1.4rem auto 3rem; max-width: 18ch; }
+
+    .closing h2 em { font-style: italic; color: #b9c9b2; }
 
     .closing .btn { background: var(--on-dark); color: var(--deep); }
-    .closing .btn:hover { background: var(--surface); }
+    .closing .btn:hover { background: var(--accent-wash); }
+    .closing a:focus-visible { outline-color: var(--on-dark); }
+
+    .closing .mail {
+      display: block;
+      margin-top: 1.75rem;
+      font-family: var(--display);
+      font-size: 1.5rem;
+      color: var(--on-dark-soft);
+      text-decoration: none;
+    }
+
+    .closing .mail:hover { color: var(--on-dark); }
 
     footer {
       display: flex;
       justify-content: space-between;
-      padding: 28px 0 40px;
-      color: var(--ink-faint);
+      padding: 1.6rem 0 2.4rem;
       font-size: 0.85rem;
+      color: var(--ink-faint);
     }
 
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--accent); }
 
-    .rise { animation: rise 0.9s ease both; }
-    .rise.d1 { animation-delay: 0.12s; }
-    .rise.d2 { animation-delay: 0.24s; }
-    .rise.d3 { animation-delay: 0.36s; }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .entry { animation: none; }
+      .verdict { transition: none; }
+      html { scroll-behavior: auto; }
     }
 
-    @media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
-
-    @media (max-width: 800px) {
-      .split { grid-template-columns: 1fr; gap: 2.5rem; }
-      .principles { grid-template-columns: 1fr; gap: 2.25rem; }
-      .steps li { grid-template-columns: 2.75rem 1fr; }
-      .steps span { grid-column: 2; }
-      .btn-quiet { display: block; margin: 1.25rem 0 0; width: fit-content; }
+    @media (max-width: 860px) {
+      body { font-size: 18px; }
+      nav { gap: 18px; }
+      nav a:nth-child(-n+2) { display: none; }
+      .hero-foot { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
+      .actions { justify-content: flex-start; flex-wrap: wrap; }
+      .ledger-head, .entry { grid-template-columns: minmax(0, 1fr) 5.5rem 4.5rem; }
+      .ledger-head span:nth-child(1), .ledger-head span:nth-child(3),
+      .entry .time, .entry .path { display: none; }
+      .sec-head, .thesis-row { grid-template-columns: 1fr; gap: 1rem; }
+      .sec-head { margin-bottom: 3rem; }
+      .pipeline li + li { padding-left: 0; border-left: 0; }
+      .status { grid-template-columns: 1fr; gap: 3.5rem; }
     }
   </style>
 </head>
@@ -227,67 +338,182 @@
   <div class="wrap">
     <header>
       <a class="mark" href="/">Santbob Labs</a>
-      <nav>
+      <nav aria-label="Sections">
+        <a href="#thesis">Thesis</a>
         <a href="#product">Agent Gate</a>
-        <a href="#approach">Approach</a>
-        <a href="https://gate.santboblabs.com">Open app</a>
+        <a href="#status">Status</a>
+        <a href="#contact">Contact</a>
       </nav>
     </header>
 
     <div class="hero">
-      <span class="label rise">Santbob Labs</span>
-      <h1 class="rise d1">Let the web charge for <em>its own</em> knowledge.</h1>
-      <p class="lede rise d2">AI agents read proprietary sites at scale, and their owners are paid nothing. We build the infrastructure that identifies those agents, prices their access and settles the payment.</p>
-      <div class="rise d3">
-        <a class="btn" href="https://gate.santboblabs.com">Open Agent Gate</a>
-        <a class="btn-quiet" href="#product">How it works</a>
-      </div>
-    </div>
+      <h1>The web has a new reader. It <em>pays nothing.</em></h1>
 
-    <section id="product">
-      <div class="split">
-        <div>
-          <span class="label">The product</span>
-          <h2>Agent Gate</h2>
-          <p style="margin-top:1.5rem">A single dashboard for site owners. See which agents arrive, decide who is allowed, set the price per page and watch the receipts come in.</p>
-          <p>Sign in with one passkey. No seed phrase, no browser extension.</p>
+      <div class="hero-foot">
+        <p class="lede">AI agents read proprietary sites at scale and the people who wrote them are not paid. We build the layer that identifies those agents, prices their access and settles the payment.</p>
+        <div class="actions">
+          <a class="btn" href="#contact">Speak with us</a>
+          <a class="quiet" href="https://gate.santboblabs.com">Open Agent Gate</a>
         </div>
-        <ol class="steps">
-          <li><h3>Identity</h3><span>Agents carry an onchain identity, so policy can tell a registered agent from an anonymous client.</span></li>
-          <li><h3>Pricing</h3><span>The owner sets a price for each site.</span></li>
-          <li><h3>Authorization</h3><span>Allow, price or block each agent by rule.</span></li>
-          <li><h3>Payment</h3><span>Agents pay in USDC on Monad.</span></li>
-          <li><h3>Delivery</h3><span>Content is served once payment clears.</span></li>
-          <li><h3>Receipt</h3><span>Every visit is receipted and billed.</span></li>
-          <li><h3>Analytics</h3><span>Who came, what they paid, which page earned it.</span></li>
-        </ol>
+      </div>
+
+      <div class="ledger" role="table" aria-label="Sample access ledger">
+        <div class="ledger-head label" role="row">
+          <span>Time</span><span>Visitor</span><span>Page</span><span>Verdict</span><span>USDC</span>
+        </div>
+        <div class="ledger-body" id="ledger" role="rowgroup"></div>
+      </div>
+      <p class="ledger-note">Illustrative entries, drawn to show what the owner sees.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section id="thesis">
+      <div class="sec-head">
+        <span class="label">The thesis</span>
+        <h2>An open page is a free page, and agents have noticed.</h2>
+      </div>
+
+      <div class="thesis-row">
+        <span class="num">I</span>
+        <div>
+          <h3>Agents read. Owners are not paid.</h3>
+          <p>robots.txt asks crawlers to stay out. It does not enforce that and it cannot charge. Blocking an agent throws away the demand. Leaving the page open gives the work away.</p>
+        </div>
+      </div>
+      <div class="thesis-row">
+        <span class="num">II</span>
+        <div>
+          <h3>A bare 402 is not a business.</h3>
+          <p>Pay-per-crawl already exists. The owner still cannot say which agent asked, whether it paid, which page earned the money, or who should be allowed, priced or blocked.</p>
+        </div>
+      </div>
+      <div class="thesis-row">
+        <span class="num">III</span>
+        <div>
+          <h3>The value sits above the paywall.</h3>
+          <p>Identity, policy and settlement, kept together and visible to the owner. That is the product.</p>
+        </div>
       </div>
     </section>
 
-    <section id="approach" style="border-bottom:0">
-      <span class="label">Approach</span>
-      <h2>Built on a few firm ideas.</h2>
-      <div class="principles">
-        <div><div class="rule-short"></div><h3>Owners first</h3><p>The person who made the content decides who reads it and at what price.</p></div>
-        <div><div class="rule-short"></div><h3>Identity before access</h3><p>A blocked request and a paid request should both be traceable to a known agent.</p></div>
-        <div><div class="rule-short"></div><h3>Settled, not promised</h3><p>Payment happens onchain and every visit leaves a receipt the owner can check.</p></div>
+    <section id="product">
+      <div class="sec-head">
+        <span class="label">The product</span>
+        <h2>Agent Gate, the owner's ledger for agent traffic.</h2>
+      </div>
+
+      <ol class="pipeline">
+        <li><span class="num">I</span><h3>Identity</h3><p>Agents carry an onchain identity.</p></li>
+        <li><span class="num">II</span><h3>Pricing</h3><p>The owner sets the price per site.</p></li>
+        <li><span class="num">III</span><h3>Authorization</h3><p>Allow, price or block by rule.</p></li>
+        <li><span class="num">IV</span><h3>Payment</h3><p>Agents pay in USDC on Monad.</p></li>
+        <li><span class="num">V</span><h3>Delivery</h3><p>Content is served once payment clears.</p></li>
+        <li><span class="num">VI</span><h3>Receipt</h3><p>Every visit is receipted.</p></li>
+        <li><span class="num">VII</span><h3>Analytics</h3><p>Who came, what they paid, what earned it.</p></li>
+      </ol>
+
+      <p class="quote">Others control crawler access. Agent Gate makes agent access <em>programmable, identifiable and settled onchain.</em></p>
+    </section>
+
+    <section id="status">
+      <div class="sec-head">
+        <span class="label">Where the work stands</span>
+        <h2>The owner side is built. The paying side is next.</h2>
+      </div>
+
+      <div class="status">
+        <div>
+          <span class="label">Built</span>
+          <h3>The owner dashboard</h3>
+          <ul>
+            <li><strong>Passkey sign-in</strong>One passkey derives each site's payout and ownership keys. No seed phrase.</li>
+            <li><strong>Live traffic analytics</strong>Requests, agents and pages, read from a real site's own feed.</li>
+            <li><strong>Allow and block rules</strong>Per agent, per site.</li>
+            <li><strong>Agent identity</strong>ERC-8004 registration and lookup on the Monad testnet.</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Next</span>
+          <h3>The paying gateway</h3>
+          <ul>
+            <li><strong>402 gateway</strong>Quote a price, accept USDC, deliver the page.</li>
+            <li><strong>Settlement on Monad</strong>Payouts to the owner's derived address.</li>
+            <li><strong>Receipt indexer</strong>Every paid visit recorded and queryable.</li>
+          </ul>
+        </div>
       </div>
     </section>
   </div>
 
-  <section class="closing">
+  <section class="closing" id="contact">
     <div class="wrap">
-      <span class="label">Agent Gate</span>
-      <h2>See who is reading your site.</h2>
-      <a class="btn" href="https://gate.santboblabs.com">Open the dashboard</a>
+      <span class="label">Investors and partners</span>
+      <h2>If agents will read the web, <em>someone should be paid for it.</em></h2>
+      <a class="btn" href="mailto:admin@santboblabs.com">Write to us</a>
+      <a class="mail" href="mailto:admin@santboblabs.com">admin@santboblabs.com</a>
     </div>
   </section>
 
   <div class="wrap">
     <footer>
       <span>Santbob Labs</span>
-      <a href="mailto:admin@santboblabs.com">admin@santboblabs.com</a>
+      <a href="https://gate.santboblabs.com">gate.santboblabs.com</a>
     </footer>
   </div>
+
+  <script>
+    const feed = [
+      { who: "Registered agent #1810", path: "/essays/agent-payments", end: "paid", amt: "0.020" },
+      { who: "Anonymous client", path: "/archive/2024", end: "blocked", amt: "" },
+      { who: "Registered agent #212", path: "/notes/settlement", end: "paid", amt: "0.015" },
+      { who: "Registered agent #1810", path: "/essays/the-402-problem", end: "paid", amt: "0.020" },
+      { who: "Anonymous client", path: "/research/index", end: "blocked", amt: "" },
+      { who: "Registered agent #377", path: "/notes/passkeys", end: "paid", amt: "0.010" },
+      { who: "Registered agent #212", path: "/archive/2025", end: "paid", amt: "0.015" },
+    ];
+    const label = { pending: "402", paid: "Paid", blocked: "Blocked" };
+    const body = document.getElementById("ledger");
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let i = 0;
+
+    function row(item, state) {
+      const el = document.createElement("div");
+      el.className = "entry";
+      el.setAttribute("role", "row");
+      el.innerHTML =
+        `<span class="time"></span><span class="agent"></span><span class="path"></span>` +
+        `<span class="verdict ${state}"></span><span class="amt"></span>`;
+      el.querySelector(".time").textContent = new Date().toTimeString().slice(0, 8);
+      el.querySelector(".agent").textContent = item.who;
+      el.querySelector(".path").textContent = item.path;
+      el.querySelector(".verdict").textContent = label[state];
+      el.querySelector(".amt").textContent = state === "paid" ? item.amt : "";
+      return el;
+    }
+
+    function add() {
+      const item = feed[i++ % feed.length];
+      const settles = item.end !== "blocked";
+      const el = row(item, settles ? "pending" : "blocked");
+      body.prepend(el);
+      while (body.children.length > 6) body.lastChild.remove();
+      if (settles) {
+        setTimeout(() => {
+          const v = el.querySelector(".verdict");
+          v.className = "verdict paid";
+          v.textContent = label.paid;
+          el.querySelector(".amt").textContent = item.amt;
+        }, 900);
+      }
+    }
+
+    if (still) {
+      feed.slice(0, 6).forEach((item) => body.append(row(item, item.end)));
+    } else {
+      add();
+      setInterval(add, 2200);
+    }
+  </script>
 </body>
 </html>
