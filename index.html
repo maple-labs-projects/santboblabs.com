@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santbob Labs</title>
+  <meta name="description" content="Santbob Labs builds the infrastructure that lets website owners charge AI agents for access." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://santboblabs.com/" />
+  <meta property="og:title" content="Santbob Labs" />
+  <meta property="og:description" content="Infrastructure that lets website owners charge AI agents for access." />
+  <meta property="og:image" content="https://santboblabs.com/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" />
+  <style>
+    :root {
+      --paper: #f4efe6;
+      --surface: #fbf8f2;
+      --rule: #d9cfbc;
+      --rule-soft: #e6dfd0;
+      --ink: #26221c;
+      --ink-soft: #5b5347;
+      --ink-faint: #8a8071;
+      --accent: #2f4a3a;
+      --brass: #8c6d3a;
+      --deep: #1c1915;
+      --on-dark: #f4efe6;
+      --on-dark-soft: #bdb4a3;
+      --display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+      --body: "EB Garamond", "Iowan Old Style", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 28px 0;
+    }
+
+    .mark {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    nav { display: flex; gap: 28px; }
+
+    nav a, .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    nav a { color: var(--ink-soft); }
+    nav a:hover { color: var(--accent); }
+
+    .label { color: var(--ink-faint); }
+
+    .hero { padding: 11vh 0 14vh; border-bottom: 1px solid var(--rule); }
+
+    h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      max-width: 14ch;
+      margin-top: 1.25rem;
+    }
+
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .lede {
+      max-width: 36rem;
+      margin: 2rem 0 2.5rem;
+      font-size: 1.25rem;
+      color: var(--ink-soft);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.7rem;
+      background: var(--ink);
+      color: var(--on-dark);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s ease;
+    }
+
+    .btn:hover { background: var(--accent); }
+
+    .btn-quiet {
+      margin-left: 1.5rem;
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+    }
+
+    .btn-quiet:hover { color: var(--accent); border-color: var(--accent); }
+
+    section { padding: 12vh 0; border-bottom: 1px solid var(--rule); }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      gap: 4rem;
+    }
+
+    h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.1; margin-top: 1rem; }
+
+    .split p { margin: 0 0 1.25rem; color: var(--ink-soft); }
+
+    .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+
+    .steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 3.5rem 9rem 1fr;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--rule-soft);
+    }
+
+    .steps li:last-child { border-bottom: 1px solid var(--rule-soft); }
+
+    .steps li::before {
+      content: counter(step, upper-roman);
+      font-family: var(--display);
+      font-size: 1.1rem;
+      color: var(--brass);
+    }
+
+    .steps h3 { font-size: 1.45rem; }
+
+    .steps span { color: var(--ink-soft); font-size: 0.98rem; }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 3.5rem;
+    }
+
+    .principles h3 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+
+    .principles p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+
+    .rule-short { width: 2.5rem; height: 1px; background: var(--brass); margin-bottom: 1.1rem; }
+
+    .closing {
+      background: var(--deep);
+      color: var(--on-dark);
+      text-align: center;
+      border-bottom: 0;
+    }
+
+    .closing .label { color: var(--on-dark-soft); }
+
+    .closing h2 { max-width: 18ch; margin: 1rem auto 2.25rem; }
+
+    .closing .btn { background: var(--on-dark); color: var(--deep); }
+    .closing .btn:hover { background: var(--surface); }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 0 40px;
+      color: var(--ink-faint);
+      font-size: 0.85rem;
+    }
+
+
+    .rise { animation: rise 0.9s ease both; }
+    .rise.d1 { animation-delay: 0.12s; }
+    .rise.d2 { animation-delay: 0.24s; }
+    .rise.d3 { animation-delay: 0.36s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
+
+    @media (max-width: 800px) {
+      .split { grid-template-columns: 1fr; gap: 2.5rem; }
+      .principles { grid-template-columns: 1fr; gap: 2.25rem; }
+      .steps li { grid-template-columns: 2.75rem 1fr; }
+      .steps span { grid-column: 2; }
+      .btn-quiet { display: block; margin: 1.25rem 0 0; width: fit-content; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="mark" href="/">Santbob Labs</a>
+      <nav>
+        <a href="#product">Agent Gate</a>
+        <a href="#approach">Approach</a>
+        <a href="https://gate.santboblabs.com">Open app</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <span class="label rise">Santbob Labs</span>
+      <h1 class="rise d1">Let the web charge for <em>its own</em> knowledge.</h1>
+      <p class="lede rise d2">AI agents read proprietary sites at scale, and their owners are paid nothing. We build the infrastructure that identifies those agents, prices their access and settles the payment.</p>
+      <div class="rise d3">
+        <a class="btn" href="https://gate.santboblabs.com">Open Agent Gate</a>
+        <a class="btn-quiet" href="#product">How it works</a>
+      </div>
+    </div>
+
+    <section id="product">
+      <div class="split">
+        <div>
+          <span class="label">The product</span>
+          <h2>Agent Gate</h2>
+          <p style="margin-top:1.5rem">A single dashboard for site owners. See which agents arrive, decide who is allowed, set the price per page and watch the receipts come in.</p>
+          <p>Sign in with one passkey. No seed phrase, no browser extension.</p>
+        </div>
+        <ol class="steps">
+          <li><h3>Identity</h3><span>Agents carry an onchain identity, so policy can tell a registered agent from an anonymous client.</span></li>
+          <li><h3>Pricing</h3><span>The owner sets a price for each site.</span></li>
+          <li><h3>Authorization</h3><span>Allow, price or block each agent by rule.</span></li>
+          <li><h3>Payment</h3><span>Agents pay in USDC on Monad.</span></li>
+          <li><h3>Delivery</h3><span>Content is served once payment clears.</span></li>
+          <li><h3>Receipt</h3><span>Every visit is receipted and billed.</span></li>
+          <li><h3>Analytics</h3><span>Who came, what they paid, which page earned it.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="approach" style="border-bottom:0">
+      <span class="label">Approach</span>
+      <h2>Built on a few firm ideas.</h2>
+      <div class="principles">
+        <div><div class="rule-short"></div><h3>Owners first</h3><p>The person who made the content decides who reads it and at what price.</p></div>
+        <div><div class="rule-short"></div><h3>Identity before access</h3><p>A blocked request and a paid request should both be traceable to a known agent.</p></div>
+        <div><div class="rule-short"></div><h3>Settled, not promised</h3><p>Payment happens onchain and every visit leaves a receipt the owner can check.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="closing">
+    <div class="wrap">
+      <span class="label">Agent Gate</span>
+      <h2>See who is reading your site.</h2>
+      <a class="btn" href="https://gate.santboblabs.com">Open the dashboard</a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      <span>Santbob Labs</span>
+      <a href="mailto:admin@santboblabs.com">admin@santboblabs.com</a>
+    </footer>
+  </div>
+</body>
+</html>
